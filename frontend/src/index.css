@@ -1,1 +1,43 @@
 @import "tailwindcss";
+
+@theme {
+  --color-secondary: #e9cd0e;
+  --color-steel: #556174;
+  --color-midnight: #030f1f;
+  --color-night: #010c19;
+  --color-white: #ffff;
+}
+
+body {
+  background-color: var(--color-night);
+  font-family: "Roboto", "Segoe UI", system-ui, sans-serif;
+  color: var(--color-white);
+}
+
+@layer base {
+  h1 {
+    font-size: 25px;
+    font-weight: bolder;
+    margin: auto;
+  }
+
+  button {
+    color: black;
+    font-weight: 500;
+    cursor: pointer;
+  }
+}
+
+@layer components {
+  .link {
+    @apply hover:text-secondary transition duration-300;
+  }
+
+  .solidBtn {
+    @apply bg-secondary hover:bg-white;
+  }
+
+  .ghostBtn {
+    @apply border border-steel hover:bg-white hover:text-black text-white rounded-lg transition duration-500;
+  }
+}

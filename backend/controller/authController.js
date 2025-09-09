@@ -2,23 +2,23 @@ import { createUser, findUserByEmail } from "../models/UserModel.js";
 
 // Register Controller
 export async function register(req, res) {
-  const { name, email, password, mobile_number, date_of_birth } = req.body;
+  const { name, email, password, phone, dob } = req.body;
   try {
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ error: "Email already exists" });
     }
 
-    const userId = await createUser(
-      name,
-      email,
-      password,
-      mobile_number,
-      date_of_birth
-    );
+    if ((!name, !email, !password, !phone, !dob)) {
+      return res
+        .status(400)
+        .json({ error: "Please fill out all required fields." });
+    }
+
+    const userId = await createUser(name, email, password, phone, dob);
     res.status(201).json({ message: "User registered successfully", userId });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 }
 
@@ -44,6 +44,6 @@ export async function login(req, res) {
       },
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 }

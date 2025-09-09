@@ -1,5 +1,4 @@
 import pool from "../database/mysql_config.js";
-import colors from "colors"
 
 export async function initUserTable() {
   await pool.query(`
@@ -13,7 +12,7 @@ export async function initUserTable() {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         `);
-  console.log("User table is ready!".yellow.bold);
+  // console.log("User table is ready!".yellow.bold);
 }
 
 export async function createUser(
