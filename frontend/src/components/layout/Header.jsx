@@ -9,7 +9,7 @@ const Header = () => {
   const handleLinkClick = () => setIsOpen(false);
 
   return (
-    <header className="bg-steel/5 backdrop-blur-md sticky top-0 z-50">
+    <header className="w-full absolute bg-steel/10 backdrop-blur-md z-50">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <div className="text-steel text-2xl font-bold">
