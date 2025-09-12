@@ -1,7 +1,14 @@
 import Header from "./Header";
 import { Helmet } from "react-helmet";
 
-const Layout = ({ children, title, description, keywords, author }) => {
+const Layout = ({
+  children,
+  withSpacing = false,
+  title,
+  description,
+  keywords,
+  author,
+}) => {
   return (
     <>
       <Helmet>
@@ -12,7 +19,7 @@ const Layout = ({ children, title, description, keywords, author }) => {
         <title>{title}</title>
       </Helmet>
       <Header />
-      <main className="w-full">{children}</main>
+      <main className={withSpacing ? "pt-[10vh]" : ""}>{children}</main>
     </>
   );
 };

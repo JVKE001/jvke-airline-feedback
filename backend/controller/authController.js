@@ -1,23 +1,25 @@
 import { createUser, findUserByEmail } from "../models/UserModel.js";
+import JWT from "jsonwebtoken";
 
 // Register Controller
 export async function register(req, res) {
-  const { name, email, password, phone, dob } = req.body;
+  const { name, email, password, phone, dob, role } = req.body;
   try {
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return res.status(400).json({ error: "Email already exists" });
     }
 
-    if ((!name, !email, !password, !phone, !dob)) {
+    if (!name || !email || !password || !phone || !dob) {
       return res
         .status(400)
         .json({ error: "Please fill out all required fields." });
     }
 
-    const userId = await createUser(name, email, password, phone, dob);
+    const userId = await createUser(name, email, password, phone, dob, role);
     res.status(201).json({ message: "User registered successfully", userId });
   } catch (error) {
+    console.error("Register error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 }
@@ -30,20 +32,39 @@ export async function login(req, res) {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    if (user.password != password) {
+    if (user.password !== password) {
       return res.status(401).json({ error: "Invalid password" });
     }
+
+    // 1. Generate JWT token with expiry (7 days)
+    const token = JWT.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    // Send cookie to browser
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      maxAge: 1000 * 60 * 60 * 24 * 7,
+    });
+
     res.status(200).json({
-      message: "Login successfully",
+      message: "Login successful",
+      token,
       user: {
         id: user.id,
         name: user.name,
         email: user.email,
-        mobile_number: user.mobile_number,
-        date_of_birth: user.date_of_birth,
+        phone: user.phone,
+        dob: user.dob,
+        role: user.role,
       },
     });
   } catch (error) {
+    console.error("Login error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 }

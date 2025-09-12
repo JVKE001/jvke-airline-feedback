@@ -3,8 +3,8 @@ import Layout from "../../components/layout/Layout";
 
 const Register = () => {
   return (
-    <Layout>
-      <div className="flex justify-center">
+    <Layout withSpacing>
+      <div className="flex justify-center items-center">
         <RegisterForm />
       </div>
     </Layout>

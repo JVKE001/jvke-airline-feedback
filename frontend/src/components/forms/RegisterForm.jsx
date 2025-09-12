@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Input from "../input/Input";
 import Button from "../button/Button";
 
-const RegisterForm = () => {
+const RegisterForm = ({ className = "" }) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -14,6 +14,7 @@ const RegisterForm = () => {
     password: "",
     phone: "",
     dob: "",
+    role: "user",
   });
 
   // Handle input changes
@@ -44,7 +45,7 @@ const RegisterForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-md flex flex-col space-y-3.5 border border-steel p-10 bg-midnight rounded-2xl"
+      className={`w-md flex flex-col space-y-3.5 border border-steel p-10  rounded-2xl ${className}`}
     >
       <h1>Register Form</h1>
       <label htmlFor="name">Full Name</label>
@@ -87,7 +88,7 @@ const RegisterForm = () => {
         onChange={handleChange}
       />
 
-      <Button text="create account" type="submit" className="mt-5" />
+      <Button text="Create Account" type="submit" className="mt-5" />
     </form>
   );
 };

@@ -1,9 +1,28 @@
 import express from "express";
 import { register, login } from "../controller/authController.js";
+import { authMiddleware, verifyRole } from "../middleware/auth.js";
 
 const router = express.Router();
 
 router.post("/register", register);
-router.post("/login", login)
+router.post("/login", login);
+
+router.get(
+  "/admin/dashboard",
+  authMiddleware,
+  verifyRole("admin"),
+  (req, res) => {
+    res.json({ message: "Admin dashboard data", user: req.user });
+  }
+);
+
+router.get(
+  "/user/dashboard",
+  authMiddleware,
+  verifyRole("user"),
+  (req, res) => {
+    res.json({ message: "User dashboard data", user: req.user });
+  }
+);
 
 export default router;

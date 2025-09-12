@@ -27,8 +27,19 @@ const LoginForm = () => {
 
     try {
       const res = await axios.post("/api/auth/login", formData);
+
+      // Save token + role in local storage
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("role", res.data.user.role);
+
       toast.success(res.data.message);
-      navigate("/dashboard");
+
+      // Redirect to dashboard
+      if (res.data.user.role === "admin") {
+        navigate("/dashboard/admin");
+      } else {
+        navigate("/dashboard/user");
+      }
     } catch (error) {
       toast.error(
         error.response?.data?.message ||

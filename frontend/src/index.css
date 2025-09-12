@@ -34,7 +34,7 @@ body {
   }
 
   .solidBtn {
-    @apply bg-secondary hover:bg-white;
+    @apply bg-secondary hover:bg-white rounded-lg transition duration-500;
   }
 
   .ghostBtn {
