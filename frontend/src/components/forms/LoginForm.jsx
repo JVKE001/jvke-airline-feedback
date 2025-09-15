@@ -5,9 +5,11 @@ import axios from "axios";
 
 import Input from "../input/Input";
 import Button from "../button/Button";
+import { useAuth } from "../../context/AuthContext";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const [auth, setAuth] = useAuth();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -28,18 +30,24 @@ const LoginForm = () => {
     try {
       const res = await axios.post("/api/auth/login", formData);
 
-      // Save token + role in local storage
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("role", res.data.user.role);
+      const authData = {
+        user: res.data.user,
+        token: res.data.token,
+      };
 
+      // Save to localStorage
+      localStorage.setItem("auth", JSON.stringify(authData));
+
+      // Update context
+      setAuth(authData);
+
+      // Toast message
       toast.success(res.data.message);
 
       // Redirect to dashboard
-      if (res.data.user.role === "admin") {
-        navigate("/dashboard/admin");
-      } else {
-        navigate("/dashboard/user");
-      }
+      navigate(
+        `/dashboard/${res.data.user.role === "admin" ? "admin" : "user"}`
+      );
     } catch (error) {
       toast.error(
         error.response?.data?.message ||

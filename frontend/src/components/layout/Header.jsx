@@ -1,12 +1,31 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import GhostButton from "../button/GhostButton";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
   const handleLinkClick = () => setIsOpen(false);
+
+  const handleLogout = () => {
+    setAuth({
+      ...auth,
+      user: null,
+      token: "",
+    });
+
+    // Remove token and user info
+    localStorage.removeItem("auth");
+
+    toast.success("Logout successfully!");
+
+    navigate("/login");
+  };
 
   return (
     <header className="w-full absolute bg-steel/10 backdrop-blur-md z-50 h-[10vh]">
@@ -47,8 +66,27 @@ const Header = () => {
 
         {/* Auth buttons (desktop only) */}
         <div className="hidden md:flex gap-3">
-          <GhostButton text="Login" to="/login" />
-          <GhostButton text="Sign up" to="/register" />
+          {!auth.user ? (
+            <>
+              <GhostButton text="Login" to="/login" />
+              <GhostButton text="Sign up" to="/register" />
+            </>
+          ) : (
+            <>
+              <GhostButton
+                text="Dashboard"
+                to={`/dashboard/${
+                  auth?.user?.role === "admin" ? "admin" : "user"
+                }`}
+              />
+              <GhostButton
+                text="Logout"
+                onClick={handleLogout}
+                to="/login"
+                className="hover:bg-red-700 border-red-600 text-white"
+              />
+            </>
+          )}
         </div>
       </div>
 
@@ -58,7 +96,7 @@ const Header = () => {
           isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="flex flex-col gap-4 px-6 py-4 text-center backdrop-blur-md shadow-lg font-medium">
+        <nav className="flex flex-col gap-4 px-6 py-4 text-center backdrop-blur-md shadow-lg font-medium bg-midnight">
           <NavLink className="link" to="/" onClick={handleLinkClick}>
             Home
           </NavLink>
@@ -71,12 +109,43 @@ const Header = () => {
           <NavLink className="link" to="/contact" onClick={handleLinkClick}>
             Contact
           </NavLink>
-          <NavLink className="link" to="/login" onClick={handleLinkClick}>
-            Login
-          </NavLink>
-          <NavLink className="link" to="/register" onClick={handleLinkClick}>
-            Sign Up
-          </NavLink>
+
+          {!auth.user ? (
+            <>
+              <NavLink className="link" to="/login" onClick={handleLinkClick}>
+                Login
+              </NavLink>
+              <NavLink
+                className="link"
+                to="/register"
+                onClick={handleLinkClick}
+              >
+                Sign Up
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                className="link"
+                to={`/dashboard/${
+                  auth.user.role === "admin" ? "admin" : "user"
+                }`}
+                onClick={handleLinkClick}
+              >
+                Dashboard
+              </NavLink>
+              <NavLink
+                className="link"
+                to="/login"
+                onClick={() => {
+                  handleLogout();
+                  handleLinkClick();
+                }}
+              >
+                Logout
+              </NavLink>
+            </>
+          )}
         </nav>
       </div>
     </header>
