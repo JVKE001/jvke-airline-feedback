@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
-import img1 from "../../assets/carousel_img_1.jpeg";
-import img2 from "../../assets/carousel_img_2.jpg";
-import img3 from "../../assets/carousel_img_3.jpg";
+import img1 from "../../assets/images/carousel_img_1.jpg";
+import img2 from "../../assets/images/carousel_img_2.jpg";
+import img3 from "../../assets/images/carousel_img_3.jpg";
 
 const slides = [
   {
@@ -48,7 +48,7 @@ const Hero = () => {
               alt={`slide-${i}`}
               className="w-full h-auto md:h-full object-cover"
             />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4 bg-black/50">
               <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-bold mb-4 drop-shadow-lg">
                 {slide.title}
               </h2>

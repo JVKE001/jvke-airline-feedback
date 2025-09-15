@@ -40,4 +40,7 @@ body {
   .ghostBtn {
     @apply border border-steel hover:bg-white hover:text-black text-white rounded-lg transition duration-500;
   }
+  .dashboardMenuItems {
+    @apply block text-center text-[20px] py-2 rounded text-gray-400 hover:text-white hover:bg-[#015f70] transition-colors duration-300;
+  }
 }

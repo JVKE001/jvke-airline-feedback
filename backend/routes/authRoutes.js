@@ -8,7 +8,7 @@ router.post("/register", register);
 router.post("/login", login);
 
 router.get(
-  "/admin/dashboard",
+  "/dashboard/admin",
   authMiddleware,
   verifyRole("admin"),
   (req, res) => {
@@ -17,7 +17,7 @@ router.get(
 );
 
 router.get(
-  "/user/dashboard",
+  "/dashboard/user",
   authMiddleware,
   verifyRole("user"),
   (req, res) => {
