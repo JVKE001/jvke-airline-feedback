@@ -43,11 +43,8 @@ const RegisterForm = ({ className = "" }) => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className={`w-md flex flex-col space-y-3.5 border border-steel p-10  rounded-2xl ${className}`}
-    >
-      <h1>Register Form</h1>
+    <form onSubmit={handleSubmit} className="form">
+      <h2>Register Form</h2>
       <label htmlFor="name">Full Name</label>
       <Input
         placeholder="Your Real Name"

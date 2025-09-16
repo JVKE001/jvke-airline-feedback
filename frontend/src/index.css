@@ -18,21 +18,43 @@ body {
   h1 {
     font-size: 25px;
     font-weight: bolder;
-    margin: auto;
+    text-align: center;
   }
 
+  h2 {
+    font-size: 25px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    h2 {
+      font-size: 30px;
+    }
+  }
   button {
     color: black;
     font-weight: 500;
     cursor: pointer;
   }
+
+  table {
+    min-width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #d1d5dc;
+    border-radius: 10px;
+    overflow: hidden;
+  }
 }
 
 @layer components {
+  /* Links */
   .link {
     @apply hover:text-secondary transition duration-300;
   }
 
+  /* Buttons */
   .solidBtn {
     @apply bg-secondary hover:bg-white rounded-lg transition duration-500;
   }
@@ -40,7 +62,23 @@ body {
   .ghostBtn {
     @apply border border-steel hover:bg-white hover:text-black text-white rounded-lg transition duration-500;
   }
+
+  /* Menu Items */
   .dashboardMenuItems {
     @apply block text-center text-[20px] py-2 rounded text-gray-400 hover:text-white hover:bg-[#015f70] transition-colors duration-300;
+  }
+
+  /* Table */
+  .th {
+    @apply px-4 py-4 text-left text-sm font-semibold border border-gray-300;
+  }
+
+  .td {
+    @apply px-4 py-4 text-sm border border-gray-300;
+  }
+
+  /* Form  */
+  .form {
+    @apply w-md flex flex-col space-y-3.5 border border-steel p-10 bg-midnight rounded-2xl;
   }
 }

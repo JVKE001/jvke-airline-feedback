@@ -58,11 +58,8 @@ const LoginForm = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="w-md flex flex-col space-y-3.5 border border-steel p-10 bg-midnight rounded-2xl"
-    >
-      <h1>Login Form</h1>
+    <form onSubmit={handleSubmit} className="form">
+      <h2>Login Form</h2>
       <label htmlFor="email">Email</label>
       <Input
         type="email"

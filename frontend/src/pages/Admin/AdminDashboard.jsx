@@ -5,7 +5,7 @@ const AdminDashboard = () => {
   return (
     <Layout withSpacing>
       <div className="grid grid-cols-12">
-        <div className="col-span-12 md:col-span-3 md:h-[90vh] bg-steel/10">
+        <div className="col-span-12 md:col-span-3 h-[90vh] bg-steel/10">
           <AdminMenu />
         </div>
 

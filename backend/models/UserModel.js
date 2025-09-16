@@ -1,7 +1,9 @@
 import pool from "../database/mysql_config.js";
 
+// Initialize table if it doesn't exist
 export async function initUserTable() {
-  await pool.query(`
+  try {
+    await pool.query(`
         CREATE TABLE IF NOT EXISTS users (
             id INT AUTO_INCREMENT PRIMARY KEY,
             name VARCHAR(100) NOT NULL,
@@ -13,9 +15,14 @@ export async function initUserTable() {
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
         `);
-  // console.log("User table is ready!".yellow.bold);
+    console.log("User table is ready!".yellow.bold);
+  } catch (error) {
+    console.error("Error creating user table:", error);
+    throw error;
+  }
 }
 
+// Create a new user
 export async function createUser(
   name,
   email,
@@ -24,16 +31,41 @@ export async function createUser(
   dob,
   role = "user"
 ) {
-  const [result] = await pool.query(
-    "INSERT INTO users (name, email, password, phone, dob, role) VALUES (?, ?, ?, ?, ?, ?)",
-    [name, email, password, phone, dob, role]
-  );
-  return result.insertId;
+  try {
+    const [result] = await pool.query(
+      "INSERT INTO users (name, email, password, phone, dob, role) VALUES (?, ?, ?, ?, ?, ?)",
+      [name, email, password, phone, dob, role]
+    );
+    return result.insertId;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw error;
+  }
 }
 
+// Find user by email (used in login/register)
 export async function findUserByEmail(email) {
-  const [rows] = await pool.query("SELECT * FROM users WHERE email = ? ", [
-    email,
-  ]);
-  return rows[0];
+  try {
+    const [rows] = await pool.query(
+      "SELECT * FROM users WHERE email = ? LIMIT 1",
+      [email]
+    );
+    return rows[0] || null;
+  } catch (error) {
+    console.error("Error finding user by email:", error);
+    throw error;
+  }
+}
+
+// Get all users (excluding password by default)
+export async function getAllUsers() {
+  try {
+    const [rows] = await pool.query(
+      "SELECT id, name, email,phone, dob, role, created_at FROM users"
+    );
+    return rows;
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
 }

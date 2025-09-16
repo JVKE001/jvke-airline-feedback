@@ -4,7 +4,7 @@ import Layout from "../../components/layout/Layout";
 const Register = () => {
   return (
     <Layout withSpacing>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center my-10">
         <RegisterForm />
       </div>
     </Layout>
