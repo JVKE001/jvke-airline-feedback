@@ -48,6 +48,12 @@ body {
   }
 }
 
+@layer utilities {
+  .center-md-block {
+    @apply flex justify-center items-center md:block md:mx-auto;
+  }
+}
+
 @layer components {
   /* Links */
   .link {
@@ -80,5 +86,22 @@ body {
   /* Form  */
   .form {
     @apply w-md flex flex-col space-y-3.5 border border-steel p-10 bg-midnight rounded-2xl;
+  }
+}
+
+/* Card components */
+@layer components {
+  .detailItem {
+    @apply font-medium text-lg text-gray-900;
+  }
+}
+
+/* Dashboard Components */
+@layer components {
+  .col3 {
+    @apply col-span-12 md:col-span-3 bg-steel/10;
+  }
+  .col9 {
+    @apply col-span-12 md:col-span-9 h-screen md:h-[90vh];
   }
 }

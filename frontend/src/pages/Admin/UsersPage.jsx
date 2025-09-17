@@ -28,11 +28,11 @@ const UsersPage = () => {
   return (
     <Layout withSpacing>
       <div className="grid grid-cols-12">
-        <div className="col-span-12 md:col-span-3 h-[90vh]  bg-steel/10">
+        <div className="col3">
           <AdminMenu />
         </div>
-        <div className="col-span-12 md:col-span-9 px-5">
-          <h2 className="my-6">Registered Users</h2>
+        <div className="col9 px-5">
+          <h2 className="my-8">Registered Users</h2>
           <div className="overflow-x-auto">
             <table>
               <thead>
