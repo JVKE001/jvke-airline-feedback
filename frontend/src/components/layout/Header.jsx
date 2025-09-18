@@ -43,9 +43,15 @@ const Header = () => {
           <NavLink className="link" to="/about">
             About
           </NavLink>
-          <NavLink className="link" to="/feedback">
-            Feedback
-          </NavLink>
+          {auth?.user ? (
+            <NavLink className="link" to="/feedback">
+              Feedback
+            </NavLink>
+          ) : (
+            <span className="link opacity-50 pointer-events-none">
+              Feedback
+            </span>
+          )}
           <NavLink className="link" to="/contact">
             Contact
           </NavLink>
@@ -103,9 +109,16 @@ const Header = () => {
           <NavLink className="link" to="/about" onClick={handleLinkClick}>
             About
           </NavLink>
-          <NavLink className="link" to="/feedback" onClick={handleLinkClick}>
-            Feedback
-          </NavLink>
+          {auth?.user ? (
+            <NavLink className="link" to="/feedback" onClick={handleLinkClick}>
+              Feedback
+            </NavLink>
+          ) : (
+            <span className="link opacity-50 pointer-events-none">
+              Feedback
+            </span>
+          )}
+
           <NavLink className="link" to="/contact" onClick={handleLinkClick}>
             Contact
           </NavLink>

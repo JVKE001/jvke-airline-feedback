@@ -14,7 +14,7 @@ const Input = ({
       onChange={onChange}
       name={name}
       // required
-      className={`w-full p-3 rounded-lg border border-steel outline-0 focus:ring-2 focus:ring-secondary focus:border-secondary ${className}`}
+      className={`p-3 rounded-lg border border-steel outline-0 focus:ring-2 focus:ring-secondary focus:border-secondary ${className}`}
     />
   );
 };

@@ -7,6 +7,7 @@ import Register from "./pages/Auth/Register";
 // Main Pages
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
+import Feedback from "./pages/Feedback/Feedback";
 
 // Admin Related Pages
 import AdminDashboard from "./pages/Admin/AdminDashboard";
@@ -24,6 +25,7 @@ const App = () => {
       {/* Main Routes */}
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/feedback" element={<Feedback />} />
 
       {/* Forms Routes */}
       <Route path="/login" element={<Login />} />

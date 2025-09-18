@@ -1,3 +1,5 @@
+import pool from "../database/mysql_config.js";
+
 import { createUser, findUserByEmail } from "../models/UserModel.js";
 import { hashPassword, comparePassword } from "../helper/authHelper.js";
 import JWT from "jsonwebtoken";
@@ -100,3 +102,30 @@ export async function login(req, res) {
     res.status(500).json({ error: "Internal server error" });
   }
 }
+
+// Feedback Controller
+export const submitFeedback = async (req, res) => {
+  try {
+    const { name, email, message, rating } = req.body;
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
+
+    const query = `INSERT INTO feedbacks (name, email, message, rating)
+  VALUES(?, ?, ?, ?)`;
+
+    const values = [name, email, message, rating || null];
+
+    const [result] = await pool.query(query, values);
+
+    res.status(201).json({
+      success: true,
+      message: "Feedback submitted successfully",
+      feedbackId: result.insertId,
+    });
+  } catch (error) {
+    console.error("Error inserting feedback:", error);
+    res.status(500).json({ error: "Database error" });
+  }
+};

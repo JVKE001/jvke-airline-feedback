@@ -4,6 +4,7 @@ import colors from "colors";
 import cookieParser from "cookie-parser";
 import authRoutes from "./routes/authRoutes.js";
 import { initUserTable } from "./models/UserModel.js";
+import { initFeedbackTable } from "./models/FeedbackModel.js";
 import adminRoutes from "./routes/adminRoutes.js";
 
 dotenv.config();
@@ -21,6 +22,7 @@ const PORT = process.env.PORT || 5000;
 async function startServer() {
   try {
     await initUserTable();
+    await initFeedbackTable();
 
     app.listen(PORT, () => {
       console.log(
