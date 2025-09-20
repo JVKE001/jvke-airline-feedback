@@ -31,41 +31,27 @@ export async function createUser(
   dob,
   role = "user"
 ) {
-  try {
-    const [result] = await pool.query(
-      "INSERT INTO users (name, email, password, phone, dob, role) VALUES (?, ?, ?, ?, ?, ?)",
-      [name, email, password, phone, dob, role]
-    );
-    return result.insertId;
-  } catch (error) {
-    console.error("Error creating user:", error);
-    throw error;
-  }
+  const [result] = await pool.query(
+    "INSERT INTO users (name, email, password, phone, dob, role) VALUES (?,?,?,?,?,?)",
+    [name, email, password, phone, dob, role]
+  );
+  return result.insertId;
 }
 
 // Find user by email (used in login/register)
 export async function findUserByEmail(email) {
-  try {
-    const [rows] = await pool.query(
-      "SELECT * FROM users WHERE email = ? LIMIT 1",
-      [email]
-    );
-    return rows[0] || null;
-  } catch (error) {
-    console.error("Error finding user by email:", error);
-    throw error;
-  }
+  const [rows] = await pool.query(
+    "SELECT * FROM users WHERE email = ? LIMIT 1",
+    [email]
+  );
+
+  return rows[0] || null;
 }
 
 // Get all users (excluding password by default)
 export async function getAllUsers() {
-  try {
-    const [rows] = await pool.query(
-      "SELECT id, name, email,phone, dob, role, created_at FROM users"
-    );
-    return rows;
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    throw error;
-  }
+  const [rows] = await pool.query(
+    "SELECT id, name, email, phone, dob, role, created_at FROM users"
+  );
+  return rows;
 }

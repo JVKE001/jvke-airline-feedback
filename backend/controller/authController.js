@@ -1,26 +1,24 @@
 import pool from "../database/mysql_config.js";
 
 import { createUser, findUserByEmail } from "../models/UserModel.js";
+import { createFeedback } from "../models/FeedbackModel.js";
 import { hashPassword, comparePassword } from "../helper/authHelper.js";
 import JWT from "jsonwebtoken";
 
 // Register Controller
 export async function register(req, res) {
-  const { name, email, password, phone, dob, role } = req.body;
   try {
-    // Find email
-    const existingUser = await findUserByEmail(email);
+    const { name, email, password, phone, dob, role } = req.body;
 
-    // Find unique user
-    if (existingUser) {
-      return res.status(400).json({ error: "Email already exists" });
+    // Validate required fields
+    if (!name || !email || !password || !phone || !dob) {
+      return res.status(400).json({ error: "All fields are required" });
     }
 
-    // All fields are required
-    if (!name || !email || !password || !phone || !dob) {
-      return res
-        .status(400)
-        .json({ error: "Please fill out all required fields." });
+    // Check for existing email
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ error: "Email already exists" });
     }
 
     // Hash the password
@@ -46,19 +44,15 @@ export async function register(req, res) {
 
 // Login Controller
 export async function login(req, res) {
-  const { email, password } = req.body;
   try {
-    // Find user
-    const user = await findUserByEmail(email);
+    const { email, password } = req.body;
 
-    // Verify email and password are provided
     if (!email || !password) {
-      return res
-        .status(400)
-        .json({ error: "Email and password are required." });
+      return res.status(400).json({ error: "Email and password are required" });
     }
 
-    // User not found
+    // Find user
+    const user = await findUserByEmail(email);
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
@@ -106,23 +100,18 @@ export async function login(req, res) {
 // Feedback Controller
 export const submitFeedback = async (req, res) => {
   try {
-    const { name, email, message, rating } = req.body;
+    const { userId, message, rating } = req.body;
 
-    if (!name || !email || !message) {
-      return res.status(400).json({ message: "All fields are required" });
+    if (!userId || !message) {
+      return res.status(400).json({ message: "Message required" });
     }
 
-    const query = `INSERT INTO feedbacks (name, email, message, rating)
-  VALUES(?, ?, ?, ?)`;
-
-    const values = [name, email, message, rating || null];
-
-    const [result] = await pool.query(query, values);
+    const feedbackId = await createFeedback(userId, message, rating);
 
     res.status(201).json({
       success: true,
       message: "Feedback submitted successfully",
-      feedbackId: result.insertId,
+      feedbackId,
     });
   } catch (error) {
     console.error("Error inserting feedback:", error);
