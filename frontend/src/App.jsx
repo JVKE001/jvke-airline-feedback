@@ -8,6 +8,7 @@ import Register from "./pages/Auth/Register";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Feedback from "./pages/Feedback/Feedback";
+import Contact from "./pages/Contact/Contact";
 
 // Admin Related Pages
 import AdminDashboard from "./pages/Admin/AdminDashboard";
@@ -26,6 +27,7 @@ const App = () => {
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
       <Route path="/feedback" element={<Feedback />} />
+      <Route path="/contact" element={<Contact />} />
 
       {/* Forms Routes */}
       <Route path="/login" element={<Login />} />

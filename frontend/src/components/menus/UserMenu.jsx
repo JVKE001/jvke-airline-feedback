@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Button from "../button/Button";
 import { useAuth } from "../../context/AuthContext";
 
-const AdminMenu = () => {
+const UserMenu = () => {
   const [auth, setAuth] = useAuth();
   const navigation = useNavigate();
 
@@ -24,19 +24,11 @@ const AdminMenu = () => {
     // Navigate to login
     Navigate("/login");
   };
+
   return (
     <nav className="flex flex-col space-y-4 p-4">
-      <NavLink to="/dashboard/admin" className="dashboardMenuItems">
+      <NavLink to="/dashboard/user" className="dashboardMenuItems">
         Dashboard
-      </NavLink>
-      <NavLink to="/dashboard/admin/users" className="dashboardMenuItems">
-        Users
-      </NavLink>
-      <NavLink to="/dashboard/admin/feedbacks" className="dashboardMenuItems">
-        Feedbacks
-      </NavLink>
-      <NavLink to="/dashboard/admin/reviews" className="dashboardMenuItems">
-        Reviews
       </NavLink>
 
       <Button
@@ -48,4 +40,4 @@ const AdminMenu = () => {
   );
 };
 
-export default AdminMenu;
+export default UserMenu;

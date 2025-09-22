@@ -1,4 +1,5 @@
 import Header from "./Header";
+import Footer from "./Footer";
 import { Helmet } from "react-helmet";
 
 const Layout = ({
@@ -20,6 +21,7 @@ const Layout = ({
       </Helmet>
       <Header />
       <main className={withSpacing ? "pt-[10vh]" : ""}>{children}</main>
+      <Footer />
     </>
   );
 };

@@ -1,7 +1,6 @@
 import Layout from "../../components/layout/Layout";
 import AdminMenu from "../../components/menus/AdminMenu";
 import { useAuth } from "../../context/AuthContext";
-
 import GhostButton from "../../components/button/GhostButton";
 
 const AdminDashboard = () => {
