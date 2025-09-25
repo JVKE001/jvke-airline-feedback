@@ -50,7 +50,8 @@ const AdminDashboard = () => {
               <GhostButton
                 text="Update Info"
                 size="md"
-                className="w-full text-black hover:bg-blue-600 hover:text-white"
+                to="/dashboard/admin/update"
+                className="text-black hover:bg-blue-600 hover:text-white"
               />
             </div>
           </div>

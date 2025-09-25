@@ -55,3 +55,18 @@ export async function getAllUsers() {
   );
   return rows;
 }
+
+// FInd user by ID
+export async function findUserById(id) {
+  const [rows] = await pool.query("SELECT * FROM users WHERE id = ?", [id]);
+  return rows[0];
+}
+
+// Update user by ID
+export async function updateUserById(id, fields) {
+  const { name, email, password, phone, dob } = fields;
+  await pool.query(
+    "UPDATE users SET name=?, email=?, password=?, phone=?, dob=? WHERE id=?",
+    [name, email, password, phone, dob, id]
+  );
+}

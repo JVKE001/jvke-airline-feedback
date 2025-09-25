@@ -1,6 +1,11 @@
 import pool from "../database/mysql_config.js";
 
-import { createUser, findUserByEmail } from "../models/UserModel.js";
+import {
+  createUser,
+  findUserByEmail,
+  findUserById,
+  updateUserById,
+} from "../models/UserModel.js";
 import { createFeedback } from "../models/FeedbackModel.js";
 import { hashPassword, comparePassword } from "../helper/authHelper.js";
 import JWT from "jsonwebtoken";
@@ -116,5 +121,54 @@ export const submitFeedback = async (req, res) => {
   } catch (error) {
     console.error("Error inserting feedback:", error);
     res.status(500).json({ error: "Database error" });
+  }
+};
+
+// Update Profile Controller
+export const updateProfile = async (req, res) => {
+  try {
+    let { name, email, password, phone, dob } = req.body;
+    const userId = req.user.id;
+
+    // Find the user
+    const user = await findUserById(userId);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // Prepare updated fields
+    let updatedPassword = user.password;
+    if (password) {
+      updatedPassword = await hashPassword(password);
+    }
+
+    // Normailze date (YYYY-MM-DD)
+    if (dob) {
+      dob = dob.split("T")[0];
+    }
+
+    // Run update query
+    await updateUserById(userId, {
+      name: name || user.name,
+      email: email || user.email,
+      password: updatedPassword,
+      phone: phone || user.phone,
+      dob: dob || user.dob,
+    });
+
+    // Respond
+    res.status(200).json({
+      message: "Profile updated successfully",
+      user: {
+        id: userId,
+        name: name || user.name,
+        email: email || user.email,
+        phone: phone || user.phone,
+        dob: dob || user.dob,
+      },
+    });
+  } catch (error) {
+    console.error("Update profile error:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };

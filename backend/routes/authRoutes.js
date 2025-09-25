@@ -3,6 +3,7 @@ import {
   register,
   login,
   submitFeedback,
+  updateProfile,
 } from "../controller/authController.js";
 import { authMiddleware, verifyRole } from "../middleware/auth.js";
 
@@ -29,5 +30,7 @@ router.get(
     res.json({ message: "User dashboard data", user: req.user });
   }
 );
+
+router.put("/profile", authMiddleware, updateProfile);
 
 export default router;

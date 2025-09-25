@@ -15,6 +15,7 @@ import AdminDashboard from "./pages/Admin/AdminDashboard";
 import UsersPage from "./pages/Admin/UsersPage";
 import FeedbacksPage from "./pages/Admin/FeedbacksPage";
 import ReviewsPage from "./pages/Admin/ReviewsPage";
+import UpdateUser from "./pages/Update/UpdateUser";
 
 // User Related Pages
 import UserDashboard from "./pages/Dashboard/UserDashboard";
@@ -39,6 +40,7 @@ const App = () => {
         <Route path="/dashboard/admin/users" element={<UsersPage />} />
         <Route path="/dashboard/admin/feedbacks" element={<FeedbacksPage />} />
         <Route path="/dashboard/admin/reviews" element={<ReviewsPage />} />
+        <Route path="/dashboard/admin/update" element={<UpdateUser />} />
       </Route>
 
       {/* User Related Routes */}

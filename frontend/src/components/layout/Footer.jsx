@@ -24,8 +24,8 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="/" className="hover:text-gray-300">
-                Flights
+              <a href="/about" className="hover:text-gray-300">
+                About
               </a>
             </li>
             <li>
@@ -44,7 +44,7 @@ const Footer = () => {
         {/* Contact Info */}
         <div className="flex flex-col justify-center items-center">
           <h3 className="text-lg font-semibold mb-4">Contact</h3>
-          <ul className="space-y-2 text-gray-400 ">
+          <ul className="space-y-2 text-gray-400">
             <li>Email: support@jvkeairline.com</li>
             <li>Phone: +91 123 456 7890</li>
             <li>Address: 456 Market Street, San Francisco, CA</li>
