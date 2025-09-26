@@ -27,7 +27,7 @@ The **JVKE Airline Feedback App** is a platform that allows passengers to share 
 1. Clone the repository:
    ```bash
    git clone https://github.com/JVKE001/jvke-airline-feedback.git
-   cd jvke-airline-feedback-app
+   cd jvke-airline-feedback
 
    ```
    
