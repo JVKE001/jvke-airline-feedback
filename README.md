@@ -6,18 +6,17 @@ The **JVKE Airline Feedback App** is a platform that allows passengers to share 
 
 ## 🚀 Features
 - Submit feedback quickly and easily after a flight  
-- Rate services (check-in, boarding, staff, in-flight experience, etc.)  
+- Rate services 
 - Add detailed comments for specific experiences  
 - Option to submit feedback anonymously  
-- Admin dashboard to view, filter, and analyze responses  
-- Insights to identify common issues and improve service quality  
+- Admin dashboard to view, and analyze responses  
 
 ---
 
 ## 🛠️ Tech Stack
-- **Frontend**: React / Next.js  
+- **Frontend**: React / Vite 
 - **Backend**: Node.js / Express  
-- **Database**: MongoDB  
+- **Database**: MySQL
 - **Authentication**: JWT-based secure login  
 - **Styling**: Tailwind CSS  
 
@@ -29,3 +28,28 @@ The **JVKE Airline Feedback App** is a platform that allows passengers to share 
    ```bash
    git clone https://github.com/your-username/jvke-airline-feedback-app.git
    cd jvke-airline-feedback-app
+
+   ```
+   
+### 2. Install Dependencies
+```
+cd frontend
+npm install
+```
+### 3. Run Server
+```
+cd backend
+nodemon server
+```
+
+### 4. Run Frontend
+```
+cd frontend
+npm run dev
+```
+
+---
+
+## Author
+JVKE
+
