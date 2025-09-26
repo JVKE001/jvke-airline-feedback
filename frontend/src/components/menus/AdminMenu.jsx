@@ -35,9 +35,6 @@ const AdminMenu = () => {
       <NavLink to="/dashboard/admin/feedbacks" className="dashboardMenuItems">
         Feedbacks
       </NavLink>
-      <NavLink to="/dashboard/admin/reviews" className="dashboardMenuItems">
-        Reviews
-      </NavLink>
 
       <Button
         onClick={handleLogout}

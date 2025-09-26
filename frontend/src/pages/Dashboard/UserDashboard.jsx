@@ -50,6 +50,7 @@ const UserDashboard = () => {
               <GhostButton
                 text="Update Info"
                 size="md"
+                to="/dashboard/user/update"
                 className="w-full text-black hover:bg-blue-600 hover:text-white"
               />
             </div>

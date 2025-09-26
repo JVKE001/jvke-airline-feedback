@@ -14,7 +14,6 @@ import Contact from "./pages/Contact/Contact";
 import AdminDashboard from "./pages/Admin/AdminDashboard";
 import UsersPage from "./pages/Admin/UsersPage";
 import FeedbacksPage from "./pages/Admin/FeedbacksPage";
-import ReviewsPage from "./pages/Admin/ReviewsPage";
 import UpdateUser from "./pages/Update/UpdateUser";
 
 // User Related Pages
@@ -39,13 +38,14 @@ const App = () => {
         <Route path="/dashboard/admin" element={<AdminDashboard />} />
         <Route path="/dashboard/admin/users" element={<UsersPage />} />
         <Route path="/dashboard/admin/feedbacks" element={<FeedbacksPage />} />
-        <Route path="/dashboard/admin/reviews" element={<ReviewsPage />} />
+
         <Route path="/dashboard/admin/update" element={<UpdateUser />} />
       </Route>
 
       {/* User Related Routes */}
       <Route element={<ProtectedRoutes allowRoles={["user"]} />}>
         <Route path="/dashboard/user" element={<UserDashboard />} />
+        <Route path="/dashboard/user/update" element={<UpdateUser />} />
       </Route>
     </Routes>
   );
